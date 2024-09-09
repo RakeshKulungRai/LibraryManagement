@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace LibraryManagment.Persistance
 {
-    public class LibraryManagmentDbContext:DbContext
+    public class LibraryManagmentDbContext : DbContext
     {
         private int UserId { get; set; }
-        public LibraryManagmentDbContext(DbContextOptions<LibraryManagmentDbContext> options):base(options)
+        public LibraryManagmentDbContext(DbContextOptions<LibraryManagmentDbContext> options) : base(options)
         {
-            
+
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            foreach(var entry in ChangeTracker.Entries<BaseDomainEntity>())
+            foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
             {
                 entry.Entity.UpdatedDate = DateTime.Now;
                 entry.Entity.UpdatedBy = UserId;
-                if(entry.State == EntityState.Added)
+                if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedDate = DateTime.Now;
                     entry.Entity.CreatedBy = UserId;
