@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LibraryMangment.Application.DTOs.Publisher;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagment.Web.Controllers.AdminPanel
 {
@@ -7,6 +8,11 @@ namespace LibraryManagment.Web.Controllers.AdminPanel
         public IActionResult Index()
         {
             return View();
+        }
+        public IActionResult CreateEdit(int Id)
+        {
+            PublisherDto publisher = new PublisherDto();
+            return View(publisher);
         }
     }
 }
