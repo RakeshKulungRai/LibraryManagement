@@ -13,6 +13,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryManagment.Infrastructure\LibraryManagment.Infrastructure.csproj" />
+    <ProjectReference Include="..\LibraryManagment.Persistance\LibraryManagment.Persistance.csproj" />
+    <ProjectReference Include="..\LibraryMangment.Application\LibraryMangment.Application.csproj" />
   </ItemGroup>
 
 </Project>

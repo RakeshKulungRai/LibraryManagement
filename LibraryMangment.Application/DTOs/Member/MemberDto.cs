@@ -1,13 +1,13 @@
-﻿using LibraryManagment.Domain.Common;
+﻿using LibraryMangment.Application.DTOs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryManagment.Domain
+namespace LibraryMangment.Application.DTOs.Member
 {
-    public class Member:BaseDomainEntity
+    public class MemberDto:BaseDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,8 +18,5 @@ namespace LibraryManagment.Domain
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
-
-
     }
 }

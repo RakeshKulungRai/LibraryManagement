@@ -13,6 +13,6 @@ namespace LibraryManagment.Domain
         public DateTime DueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         public  Book Book { get; set; }
-        public Member Reader { get; set; }
+        public Member Member { get; set; }
     }
 }
