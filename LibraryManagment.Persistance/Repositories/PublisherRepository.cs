@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace LibraryManagment.Persistance.Repositories
 {
-    public class BookRepository : GenericRepository<Book>, IBookRepository
+    public class PublisherRepository : GenericRepository<Publisher>, IPublisherRepository
     {
-        private readonly LibraryManagmentDbContext _context;
-        public BookRepository(LibraryManagmentDbContext context) : base(context)
+        private LibraryManagmentDbContext _context;
+        public PublisherRepository(LibraryManagmentDbContext context) : base(context)
         {
             _context = context;
         }

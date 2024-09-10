@@ -1,4 +1,4 @@
-﻿using LibraryManagment.Domain;
+﻿using LibraryManagment.Domain.Common;
 using LibraryMangment.Application.Contracts.Persistance;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace LibraryManagment.Persistance.Repositories
 {
-    public class BookRepository : GenericRepository<Book>, IBookRepository
+    public class AuthorRepository : GenericRepository<Author>, IAuthorRepository
     {
         private readonly LibraryManagmentDbContext _context;
-        public BookRepository(LibraryManagmentDbContext context) : base(context)
+        public AuthorRepository(LibraryManagmentDbContext context) : base(context)
         {
             _context = context;
+
         }
     }
 }

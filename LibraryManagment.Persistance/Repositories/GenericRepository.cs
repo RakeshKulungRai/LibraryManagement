@@ -10,23 +10,23 @@ namespace LibraryManagment.Persistance.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly LibraryManagmentDbContext _dbContext;
+        private readonly LibraryManagmentDbContext _context;
         private readonly DbSet<T> _dbSet;
-        public GenericRepository(LibraryManagmentDbContext dbContext)
+        public GenericRepository(LibraryManagmentDbContext context)
         {
-            _dbContext = dbContext;
-            _dbSet = _dbContext.Set<T>();
+            _context = context;
+            _dbSet = _context.Set<T>();
         }
         public async Task<T> Add(T entity)
         {
             await _dbSet.AddAsync(entity);
-            await _dbContext.SaveChangesAsync(true);
+            await _context.SaveChangesAsync(true);
             return entity;
         }
         public async Task Delete(T entity)
         {
             _dbSet.Remove(entity);
-            await _dbContext.SaveChangesAsync(true);
+            await _context.SaveChangesAsync(true);
         }
         public async Task<T> Get(int Id)
         {
@@ -39,8 +39,8 @@ namespace LibraryManagment.Persistance.Repositories
         public async Task<T> Update(T entity)
         {
             _dbSet.Attach(entity);
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync(true);
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync(true);
             return entity;
         }
 
