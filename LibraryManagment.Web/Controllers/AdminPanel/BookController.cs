@@ -64,8 +64,9 @@ namespace LibraryManagment.Web.Controllers.AdminPanel
             }
             return View(book);
         }
-        public IActionResult Save(int id)
+        public IActionResult Save(BookDto book)
         {
+            Console.WriteLine(book.Title);
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)

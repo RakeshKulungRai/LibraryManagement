@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,6 +19,22 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibraryManagment.Domain\LibraryManagment.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Author\" />
+    <Folder Include="Features\Book\Handlers\" />
+    <Folder Include="Features\Book\Requests\" />
+    <Folder Include="Features\Member\Handlers\Commands\" />
+    <Folder Include="Features\Member\Requests\Commands\" />
+    <Folder Include="Features\Publisher\Handlers\Commands\" />
+    <Folder Include="Features\Publisher\Handlers\Queries\" />
+    <Folder Include="Features\Publisher\Requests\Commands\" />
+    <Folder Include="Features\Publisher\Requests\Queries\" />
+    <Folder Include="Features\Transaction\Handlers\Commands\" />
+    <Folder Include="Features\Transaction\Handlers\Queries\" />
+    <Folder Include="Features\Transaction\Requests\Commands\" />
+    <Folder Include="Features\Transaction\Requests\Queries\" />
   </ItemGroup>
 
 </Project>

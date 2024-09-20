@@ -1,89 +1,76 @@
 ﻿@model LibraryMangment.Application.DTOs.Member.MemberDto
 
 @{
-    ViewData["Title"] = "CreateEdit";
+    ViewData["Title"] = "Create/Edit Member";
 }
 
-<h1>CreateEdit</h1>
+<h1>Create/Edit Member</h1>
 
-<h4>MemberDto</h4>
+<h4>Member Information</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateEdit">
+        <form asp-action="#" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* Form Fields *@
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control" id="firstName" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" id="lastName" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" id="email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+                <input asp-for="Address" class="form-control" id="address" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
+                <input asp-for="Image" type="file" class="form-control" id="imageFile" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
+                <input asp-for="Phone" class="form-control" id="phone" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
+                <input asp-for="UserName" class="form-control" id="username" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <input asp-for="Password" type="password" class="form-control" id="password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Role" class="control-label"></label>
-                <input asp-for="Role" class="form-control" />
+                <input asp-for="Role" class="form-control" id="role" />
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
+
+            @* Submit Button *@
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedDate" class="control-label"></label>
-                <input asp-for="UpdatedDate" class="form-control" />
-                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedBy" class="control-label"></label>
-                <input asp-for="UpdatedBy" class="form-control" />
-                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="button" onclick="saveMemberDetails()" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>
@@ -93,6 +80,46 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    function saveMemberDetails() {
+        var formData = new FormData();
+
+        // Gather form data
+        formData.append('ImageFile', $('#imageFile')[0].files[0]);
+        formData.append('FirstName', $('#firstName').val());
+        formData.append('LastName', $('#lastName').val());
+        formData.append('Email', $('#email').val());
+        formData.append('Address', $('#address').val());
+        formData.append('Phone', $('#phone').val());
+        formData.append('UserName', $('#username').val());
+        formData.append('Password', $('#password').val());
+        formData.append('Role', $('#role').val());
+
+        // Send AJAX request
+        $.ajax({
+            url: '/Member/Save',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response === 'success') {
+                    toastr.success("Member details saved successfully!");
+                    resetForm();
+                } else {
+                    toastr.error(response);
+                }
+            },
+            error: function () {
+                toastr.error('An error occurred while saving the member details.');
+            }
+        });
+    }
+
+    function resetForm() {
+        $('input[type=text], input[type=email], input[type=password]').val('');
+        $('input[type=file]').val('');
+    }
+</script>

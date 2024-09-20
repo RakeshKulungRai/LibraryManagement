@@ -30,7 +30,7 @@ namespace LibraryManagment.Persistance.Repositories
         }
         public async Task<T> Get(int Id)
         {
-            return await _dbSet.FindAsync(Id);
+            return await _dbSet.FindAsync(Id) ;
         }
         public async Task<IReadOnlyList<T>> GetAll()
         {

@@ -1,12 +1,20 @@
 ﻿
 
+using LibraryManagment.Infrastructure;
+using LibraryManagment.Persistance;
+using LibraryMangment.Application;
+
+
 namespace LibraryManagment.Web.Services
 {
     public static class RegisterServices
     {
-        public static IServiceCollection ConfigureServices(this IServiceCollection services,ConfigurationManager configuration)
+        public static IServiceCollection ConfigureServices(this IServiceCollection services, ConfigurationManager configuration)
         {
-        return services;
+            services.ConfigurePersistanceServiceRegistration(configuration);
+            services.ConfigureInfrastructureServicesRegistration(configuration);
+            services.ConfigurationApplicationServiceRegistrationcs();
+            return services;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LibraryManagment.Persistance.Repositories;
+using LibraryMangment.Application.Contracts.Persistance;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,13 +14,19 @@ namespace LibraryManagment.Persistance
 {
     public static class PersistanceServiceRegistration
     {
-        public static IServiceCollection ConfigurePersistanceServiceRegistration(this IServiceCollection services, IConfiguration configuration )
+        public static IServiceCollection ConfigurePersistanceServiceRegistration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<LibraryManagmentDbContext>(options =>
             {
                 options.UseSqlServer(
                     configuration.GetConnectionString("dbconnections"));
             });
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IPublisherRepository, PublisherRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
             return services;
         }
     }
